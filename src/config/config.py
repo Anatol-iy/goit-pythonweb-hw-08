@@ -1,7 +1,14 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Загружаем переменные окружения из .env
+
 class Config:
-    DB_URL = "postgresql+asyncpg://postgres:Masha1988@localhost:5432/contacts"
+    DB_URL = (
+        f"postgresql+asyncpg://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
+        f"@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    )
 
-
-config = Config
+config = Config()
 
 
